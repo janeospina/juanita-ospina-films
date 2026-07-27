@@ -289,14 +289,15 @@
    - link:      URL del proyecto (YouTube, Vimeo, Drive, etc.)
    - imagen:    URL de una miniatura (opcional). Déjalo "" si no tienes.
    ============================================================ */
-const proyectosHorizontales = [
-  {
-    titulo: "Reel Principal · Backstage & BTS",
+const reelPrincipal = {
+    titulo: "Reel Principal",
     categoria: "Reel",
-    descripcion: "Detrás de cámaras: el proceso creativo detrás de mis proyectos.",
+    descripcion: "Mi carta de presentación: una selección de mi mejor trabajo audiovisual.",
     link: "https://youtu.be/yPUn3r-XSpg",
     imagen: "https://img.youtube.com/vi/yPUn3r-XSpg/hqdefault.jpg"
-  },
+};
+
+const proyectosHorizontales = [
   {
     titulo: "Campaña Monastery I",
     categoria: "Campaña de Moda",
@@ -439,9 +440,14 @@ function cardHTML(p){
 }
 
 const grid = document.getElementById('projects-grid');
-grid.innerHTML = proyectosHorizontales.map(cardHTML).join('')
-  + `<div class="reveal" style="grid-column:1/-1;margin:10px 0 -4px;font-family:'Fraunces',serif;font-size:20px;color:var(--muted)">Shorts &amp; contenido vertical</div>`
-  + proyectosVerticales.map(cardHTML).join('');
+const label = (t) => `<div class="reveal" style="grid-column:1/-1;margin:10px 0 -4px;font-family:'Fraunces',serif;font-size:20px;color:var(--muted)">${t}</div>`;
+grid.innerHTML =
+    label('Reel principal')
+  + cardHTML(reelPrincipal)
+  + label('Moda · Shorts &amp; contenido vertical')
+  + proyectosVerticales.map(cardHTML).join('')
+  + label('Video horizontal')
+  + proyectosHorizontales.map(cardHTML).join('');
 
 // año automático
 document.getElementById('year').textContent = new Date().getFullYear();
